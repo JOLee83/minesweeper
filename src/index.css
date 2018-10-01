@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css?family=Notable');
+div, body, footer {
+  margin: 0;
+  padding: 0;
+  font-family: 'Notable', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 13px;
+}
+table {
+  background-color: black;
+  border-radius: 5px;
+  color: white;
+}
+td, th {
+  border-top: 1px solid pink;
+  border-right: 1px solid darkred;
+  border-bottom: 1px solid darkred;
+  border-left: 1px solid pink;
+  height: 20px;
+  width: 20px;
+  background-color: red;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 13px;
+  line-height: 19px;
+  vertical-align: middle;
+  
+}
+td.exposed {
+  border-top: 1px solid darkred;
+  border-right: 1px solid red;
+  border-bottom: 1px solid red;
+  border-left: 1px solid darkred;
+  background-color: pink
+}
+button {
+  border-top: 1px solid pink;
+  border-right: 1px solid darkred;
+  border-bottom: 1px solid darkred;
+  border-left: 1px solid pink;
+  background-color: red;
+  border-radius: 5px;
+  margin-top: 20px;
+  color: white;
+  font-family: 'Notable', sans-serif;
+  outline: none;
+}
+select {
+  font-family: 'Notable', sans-serif;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+.flag {
+  background-color: yellow;
+}
+.bomb {
+  border-top: 1px solid darkred;
+  border-right: 1px solid red;
+  border-bottom: 1px solid red;
+  border-left: 1px solid darkred;
+  background-color: pink
+}
+.one {
+  color:blue;
+  border-top: 1px solid darkred;
+  border-right: 1px solid red;
+  border-bottom: 1px solid red;
+  border-left: 1px solid darkred;
+  background-color: pink
+}
+.two {
+  color:green;
+  border-top: 1px solid darkred;
+  border-right: 1px solid red;
+  border-bottom: 1px solid red;
+  border-left: 1px solid darkred;
+  background-color: pink
+}
+.three {
+  color: yellow;
+  border-top: 1px solid darkred;
+  border-right: 1px solid red;
+  border-bottom: 1px solid red;
+  border-left: 1px solid darkred;
+  background-color: pink
+}
+.four {
+  color: orange;
+  border-top: 1px solid darkred;
+  border-right: 1px solid red;
+  border-bottom: 1px solid red;
+  border-left: 1px solid darkred;
+  background-color: pink
+}
+.five {
+  color: purple;
+  border-top: 1px solid darkred;
+  border-right: 1px solid red;
+  border-bottom: 1px solid red;
+  border-left: 1px solid darkred;
+  background-color: pink
+}
+.six {
+  color: red;
+  border-top: 1px solid darkred;
+  border-right: 1px solid red;
+  border-bottom: 1px solid red;
+  border-left: 1px solid darkred;
+  background-color: pink
+}
+.seven {
+  color: darkgray;
+  border-top: 1px solid darkred;
+  border-right: 1px solid red;
+  border-bottom: 1px solid red;
+  border-left: 1px solid darkred;
+  background-color: pink
+}
+.eight {
+  color: black;
+  border-top: 1px solid darkred;
+  border-right: 1px solid red;
+  border-bottom: 1px solid red;
+  border-left: 1px solid darkred;
+  background-color: pink
+}
