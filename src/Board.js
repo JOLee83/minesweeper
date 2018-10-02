@@ -22,10 +22,8 @@ class Board extends Component {
         };
     }
     selectGame = event => this.setState({ difficulty: event.target.value})
-    loadNewGame = event => {
-        this.stopTimer()
-        this.setState({timeElapsed:0})
-        this.startTimer()
+    loadNewGame = () => {
+        this.restartTimer()
         axios
             .post('https://minesweeper-api.herokuapp.com/games', 
                 {difficulty: this.state.difficulty}
@@ -47,6 +45,10 @@ class Board extends Component {
             )
             .then(response => {
                 this.setState(response.data);
+                if (response.data.state === 'won' || response.data.state === 'lost') {
+                    this.stopTimer()
+                }
+ 
             });
     }
     flag = (row, column) => {
@@ -59,6 +61,10 @@ class Board extends Component {
             )
             .then(response => {
                 this.setState(response.data);
+
+                if (response.data.state === 'won' || response.data.state === 'lost') {
+                    this.stopTimer()
+                }
             });
     }
     getSeconds = () => {
@@ -67,15 +73,22 @@ class Board extends Component {
     getMinutes = () => {
         return Math.floor(this.state.timeElapsed / 60);
     }
-    startTimer = event => {
-        this.time = setInterval( () => 
+
+    stopTimer = () => {
+        if (this.state.timer) {
+            clearInterval(this.state.timer)
+            this.setState({ timer: null})
+        }
+    }
+    restartTimer = () => {
+        this.stopTimer()
+        let timer = setInterval( () => 
             {this.setState({timeElapsed:(this.state.timeElapsed + 1)
             });
             }, 1000)
+        this.setState({ timeElapsed: 0, timer: timer})
     }
-    stopTimer = event => {
-        clearInterval(this.time)
-    }
+
     gameMessage = () => {
         if (this.state.state === 'playing' || this.state.state === 'new' && this.state.id != '0') {
             return (
@@ -85,7 +98,6 @@ class Board extends Component {
             )
         }
         if (this.state.state === 'won') {
-            this.stopTimer()
             return (
                 <h4>
                     YOU WON
@@ -94,7 +106,6 @@ class Board extends Component {
             
         }
         if (this.state.state === 'lost') {
-            this.stopTimer()
             return (
                 <h4>
                     YOU LOST
