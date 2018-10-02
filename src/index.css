@@ -13,7 +13,7 @@ table {
   border-radius: 5px;
   color: white;
 }
-td, th {
+td {
   border-top: 1px solid pink;
   border-right: 1px solid darkred;
   border-bottom: 1px solid darkred;
@@ -27,6 +27,21 @@ td, th {
   line-height: 19px;
   vertical-align: middle;
   
+}
+.top {
+  padding-top: 0;
+}
+h4 {
+  margin:5px;
+}
+th {
+  border-top: 1px solid pink;
+  border-right: 1px solid darkred;
+  border-bottom: 1px solid darkred;
+  border-left: 1px solid pink;
+  background-color: red;
+  height: 40px;
+  padding:0;
 }
 td.exposed {
   border-top: 1px solid darkred;

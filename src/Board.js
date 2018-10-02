@@ -18,24 +18,26 @@ class Board extends Component {
                 ['', '', '', '', '', '', '', '']
             ],
             state: "new",
-            mines: 10
+            mines: 10,
+            timeElapsed: 0
         };
     }
     selectGame = event => this.setState({ difficulty: event.target.value})
     loadNewGame = event => {
+        this.stopTimer()
+        this.setState({timeElapsed:0})
+        this.startTimer()
         axios
             .post('https://minesweeper-api.herokuapp.com/games', 
                 {difficulty: this.state.difficulty}
             )
             .then(response => {
                 this.setState(response.data);
-                console.log(response.data)
-            });
+            }); 
+       
+       
     };
     check = (row, column) => {
-        console.log("clicked")
-        console.log(row)
-        console.log(column)
         if(this.state.id === 0) {
             return
         }
@@ -48,13 +50,9 @@ class Board extends Component {
             )
             .then(response => {
                 this.setState(response.data);
-                console.log(response.data)
             });
     }
     flag = (row, column) => {
-        console.log("clicked")
-        console.log(row)
-        console.log(column)
         if(this.state.id === 0) {
             return
         }
@@ -64,25 +62,52 @@ class Board extends Component {
             )
             .then(response => {
                 this.setState(response.data);
-                console.log(response.data)
             });
+    }
+    getSeconds = () => {
+        return ('0' + this.state.timeElapsed % 60).slice(-2);
+    }
+    getMinutes = () => {
+        return Math.floor(this.state.timeElapsed / 60);
+    }
+    startTimer = event => {
+        console.log('started')
+        
+        this.time = setInterval( () => {this.setState({timeElapsed:(this.state.timeElapsed + 1)
+        });
+    }, 1000)
+        
+    }
+    stopTimer = event => {
+        console.log('stopped')
+        clearInterval(this.time)
+    }
+    clearTimer = event => {
+        console.log('clear')
+        this.setState(this.timeElapsed: 0)
+
+
     }
     gameMessage = () => {
         if (this.state.state === 'playing' || this.state.state === 'new' && this.state.id != '0') {
             return (
                 <h4>
-                    💣: {this.state.mines}
+                    💣: {this.state.mines} 
                 </h4>
             )
         }
         if (this.state.state === 'won') {
+            this.stopTimer()
+
             return (
                 <h4>
                     YOU WON
                 </h4>
             )
+            
         }
         if (this.state.state === 'lost') {
+            this.stopTimer()
             return (
                 <h4>
                     YOU LOST
@@ -97,6 +122,7 @@ class Board extends Component {
             )
         }
     }
+    
     render() {
         let board = this.state.board.map((row, rowIndex) => {
             return <tr key={rowIndex}>
@@ -110,22 +136,27 @@ class Board extends Component {
         return (
                 <table>
                     <thead>
-                        <tr>
-                            <th colSpan={this.state.board[0].length}>
+                        <tr className="display">
+                            <th className="top" colSpan={this.state.board[0].length}>
                                 <select value={this.state.difficulty} onChange={this.selectGame}>
-                                    <option value="0">EASY(8x8)</option>
-                                    <option value="1">MEDIUM(16x16)</option>
-                                    <option value="2">HARD(24x24)</option>
+                                    <option value="0">EASY (8x8)</option>
+                                    <option value="1">MEDIUM (16x16)</option>
+                                    <option value="2">HARD (24x24)</option>
                                 </select>
                                 <button onClick={this.loadNewGame}>{this.state.state === 'lost' ? '🤬' : '🙂'}</button>
-                                <h4>{this.gameMessage()} </h4>
-                                
-                            </th>
+                                <div>{this.gameMessage()} </div>
+                                <h4>⌚: {this.getMinutes()}:{this.getSeconds()}</h4>
+                            </th> 
                         </tr>
                     </thead>
                     <tbody>
                         {board}
                     </tbody>
+                    <thead>
+                        <tr>
+                            
+                        </tr>
+                    </thead>
                 </table>               
         )}
 }
