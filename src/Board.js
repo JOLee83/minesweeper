@@ -72,13 +72,9 @@ class Board extends Component {
             {this.setState({timeElapsed:(this.state.timeElapsed + 1)
             });
             }, 1000)
-        
     }
     stopTimer = event => {
         clearInterval(this.time)
-    }
-    clearTimer = event => {
-        this.setState(this.timeElapsed: 0)
     }
     gameMessage = () => {
         if (this.state.state === 'playing' || this.state.state === 'new' && this.state.id != '0') {
