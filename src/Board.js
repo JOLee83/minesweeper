@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import Tile from './Tile.js'
-
 class Board extends Component {
     constructor(props) {
         super(props);
@@ -34,8 +33,6 @@ class Board extends Component {
             .then(response => {
                 this.setState(response.data);
             }); 
-       
-       
     };
     check = (row, column) => {
         if(this.state.id === 0) {
@@ -71,22 +68,17 @@ class Board extends Component {
         return Math.floor(this.state.timeElapsed / 60);
     }
     startTimer = event => {
-        console.log('started')
-        
-        this.time = setInterval( () => {this.setState({timeElapsed:(this.state.timeElapsed + 1)
-        });
-    }, 1000)
+        this.time = setInterval( () => 
+            {this.setState({timeElapsed:(this.state.timeElapsed + 1)
+            });
+            }, 1000)
         
     }
     stopTimer = event => {
-        console.log('stopped')
         clearInterval(this.time)
     }
     clearTimer = event => {
-        console.log('clear')
         this.setState(this.timeElapsed: 0)
-
-
     }
     gameMessage = () => {
         if (this.state.state === 'playing' || this.state.state === 'new' && this.state.id != '0') {
@@ -98,7 +90,6 @@ class Board extends Component {
         }
         if (this.state.state === 'won') {
             this.stopTimer()
-
             return (
                 <h4>
                     YOU WON
@@ -122,7 +113,6 @@ class Board extends Component {
             )
         }
     }
-    
     render() {
         let board = this.state.board.map((row, rowIndex) => {
             return <tr key={rowIndex}>
@@ -152,11 +142,6 @@ class Board extends Component {
                     <tbody>
                         {board}
                     </tbody>
-                    <thead>
-                        <tr>
-                            
-                        </tr>
-                    </thead>
                 </table>               
         )}
 }
