@@ -1,4 +1,5 @@
-
+<h1 style={text-align: 'center'}>Mine Sweeper</h1>
+<img style={margin:'0' 'auto'} src=./public/minesweeper.png>
 
 
 https://reactjs.org/
